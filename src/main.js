@@ -11,3 +11,4 @@ App.mpType = 'app'
 const app = new Vue(App)
 app.$mount()
 Object.assign(Vue.prototype, util);
+Vue.prototype.$globalData = getApp().globalData

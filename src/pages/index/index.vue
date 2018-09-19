@@ -1,13 +1,14 @@
 <template>
 	<div class="indexBox">
+		<button class="getuserinfo" open-type="getUserInfo" @getuserinfo="bindgetuserinfo">获取</button>
 		<div class="top">
-			<button open-type="getUserInfo">123</button>
+			<button @click="onGetOpenid">登陆</button>
 		</div>
 		<div class="middle">
 			<div>
 				功能1
 			</div>
-			<div>
+			<div @click="test2">
 				功能2
 			</div>
 		</div>
@@ -18,6 +19,8 @@
 export default {
 	data() {
 		return {
+			avatarUrl: '',
+			userInfo: ''
 		}
 	},
 
@@ -25,14 +28,59 @@ export default {
 	},
 
 	methods: {
-		test(){
-			console.log('213');
-			
+		test2() {
+			console.log('test2');
+		},
+		onGetOpenid() {
+			// 调用云函数
+			wx.cloud.callFunction({
+				name: 'login',
+				data: {},
+				success: res => {
+					console.log('[云函数] [login] user openid: ', res.result.openid)
+					wx.setStorage({
+						key: 'openid',
+						data: res.result.openid,
+						success() {
+							console.log('储存成功');
+						}
+					})
+				},
+				fail: err => {
+					console.error('[云函数] [login] 调用失败', err)
+				}
+			})
+		},
+		bindgetuserinfo(e) {
+			if (e.mp.detail.userInfo) {
+				wx.setStorage({
+					key: 'userInfo',
+					data: e.mp.detail.userInfo,
+					success() {
+						console.log('userInfo储存成功');
+					}
+				})
+				this.avatarUrl = e.mp.detail.userInfo.avatarUrl;
+				this.userInfo = e.mp.detail.userInfo;
+			}
 		}
 	},
 
 	created() {
-
+		// 获取用户信息
+		wx.getSetting({
+			success: res => {
+				if (res.authSetting['scope.userInfo']) {
+					// 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+					wx.getUserInfo({
+						success: res => {
+							this.avatarUrl = res.userInfo.avatarUrl;
+							this.userInfo = res.userInfo
+						}
+					})
+				}
+			}
+		})
 	}
 }
 </script>
@@ -40,6 +88,15 @@ export default {
 <style lang="scss" scoped>
 .indexBox {
   text-align: center;
+  .getuserinfo {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: 0;
+  }
   .top {
     width: 100%;
     padding: 20px;
