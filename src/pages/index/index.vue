@@ -1,9 +1,19 @@
 <template>
 	<div class="indexBox">
+		<!-- <p class="title">welcome to miniprogram</p> -->
+		<div class="wrapper">
+			<h1 class="font1 web-font">
+				<span>welcome</span>
+			</h1>
+		</div>
 		<button class="getuserinfo" open-type="getUserInfo" @getuserinfo="bindgetuserinfo">获取</button>
 		<div class="top">
-			<button @click="onGetOpenid">登陆</button>
-			<button open-type='getPhoneNumber' @getphonenumber='getPhoneNumber'> 获取电话号码</button>
+			<div class="btnBox">
+				<button class="btn">微信登陆授权</button>
+				<!-- <button @click="onGetOpenid">登陆</button> -->
+				<p>登陆后可享受会员权益</p>
+			</div>
+			<!-- <button open-type='getPhoneNumber' @getphonenumber='getPhoneNumber'> 获取电话号码</button> -->
 		</div>
 		<div class="middle">
 			<div>
@@ -22,7 +32,8 @@ export default {
 	data() {
 		return {
 			avatarUrl: '',
-			userInfo: ''
+			userInfo: '',
+			name: 'welcome'
 		}
 	},
 
@@ -33,7 +44,7 @@ export default {
 		test2() {
 
 		},
-		getPhoneNumber (e) {
+		getPhoneNumber(e) {
 			console.log(e);
 			if (e.detail.errMsg === 'getPhoneNumber:fail user deny') {
 				wx.showModal({
@@ -79,7 +90,19 @@ export default {
 	},
 
 	mounted() {
-
+		wx.loadFontFace({
+			family: 'webfont',
+			source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
+			success: function (res) {
+				console.log(res.status) //  loaded
+			},
+			fail: function (res) {
+				console.log(res.status) //  error
+			},
+			complete: function (res) {
+				console.log(res.status);
+			}
+		});
 	},
 
 	created() {
@@ -104,10 +127,16 @@ export default {
 <style lang="scss" scoped>
 .indexBox {
   text-align: center;
+  padding: 30px;
+  .title {
+    font-size: 40px;
+    font-weight: bold;
+  }
   .getuserinfo {
     position: fixed;
     top: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -116,12 +145,79 @@ export default {
   .top {
     width: 100%;
     padding: 20px;
+    margin-top: 100px;
+    .btnBox {
+      padding: 100px 0 50px 0;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px -3px #bdbdbd;
+      text-align: center;
+      .btn {
+        display: inline-block;
+        border-radius: 50px;
+        padding: 20px 60px;
+        background-image: radial-gradient(20px 0px, #f6ce47, #fbe060);
+        box-shadow: 0 4px 20px -3px #bdbdbd;
+        margin-bottom: 50px;
+        font-size: 32px;
+      }
+    }
   }
-  .middle {
-    display: flex;
-    div {
-      flex: 1;
-      padding: 20px;
+  .wrapper h1 {
+    font-size: 100px;
+    margin: 0;
+    font-weight: normal;
+    animation: neon 3s infinite;
+  }
+  .font1 {
+    font-family: "黑体", cursive;
+  }
+
+  @keyframes neon {
+    0% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
+    }
+    80% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
+    }
+    81% {
+      color: #222;
+      text-shadow: 0 0 10px #000, 1px 1px rgb(99, 74, 82), -2px 0px 4px #29121a;
+    }
+    94% {
+      color: #222;
+      text-shadow: 0 0 10px #000, 1px 1px rgb(99, 74, 82), -2px 0px 4px #29121a;
+    }
+    95% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
+    }
+    96% {
+      color: #222;
+      text-shadow: 0 0 10px #000, 1px 1px rgb(99, 74, 82), -2px 0px 4px #29121a;
+    }
+    97% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
+    }
+    98% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
+    }
+    99% {
+      color: #222;
+      text-shadow: 0 0 10px #000, 1px 1px rgb(99, 74, 82), -2px 0px 4px #29121a;
+    }
+    100% {
+      color: #e91e63;
+      text-shadow: 0 0 10px #e91e63, 1px 1px rgb(255, 149, 162),
+        0 0 280px #e91e9f;
     }
   }
 }
