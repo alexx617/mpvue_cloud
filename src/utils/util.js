@@ -8,6 +8,16 @@ export default {
       mask: true
     })
   },
+  $alert(content, cb, showCancel = false, title = '') {
+    wx.showModal({
+      title,
+      showCancel,
+      content,
+      success(res) {
+        if (cb) return cb();
+      }
+    });
+  },
   $setTitle(title) {
     wx.setNavigationBarTitle({
       title
