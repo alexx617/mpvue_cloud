@@ -1,11 +1,11 @@
 <template>
 	<div class="indexBox">
-		<p class="title">Miniprogram</p>
-		<!-- <div class="wrapper">
+		<!-- <p class="title">Miniprogram</p> -->
+		<div class="wrapper">
 			<h1 class="font1 web-font">
-				<span>welcome</span>
+				<span>WELCOME</span>
 			</h1>
-		</div> -->
+		</div>
 		<button v-if="showUserInfo" class="getuserinfo" open-type="getUserInfo" @getuserinfo="bindgetuserinfo"></button>
 		<div class="top">
 			<div class="btnBox">
@@ -117,19 +117,19 @@ export default {
 
 
 
-		// wx.loadFontFace({
-		// 	family: 'webfont',
-		// 	source: 'url("https://github.com/alexx617/mpvue_cloud/blob/8dcbd22621f0c1d2731f32ab86120b468dcaf609/Monoton-Regular.ttf?raw=true")',
-		// 	success: function (res) {
-		// 		console.log(res.status) //  loaded
-		// 	},
-		// 	fail: function (res) {
-		// 		console.log(res.status) //  error
-		// 	},
-		// 	complete: function (res) {
-		// 		console.log(res.status);
-		// 	}
-		// });
+		wx.loadFontFace({
+			family: 'webfont',
+			source: 'url("https://github.com/alexx617/mpvue_cloud/blob/8dcbd22621f0c1d2731f32ab86120b468dcaf609/Monoton-Regular.ttf?raw=true")',
+			success: function (res) {
+				console.log(res.status) //  loaded
+			},
+			fail: function (res) {
+				console.log(res.status) //  error
+			},
+			complete: function (res) {
+				console.log(res.status);
+			}
+		});
 	},
 
 	created() {
@@ -216,7 +216,7 @@ export default {
   }
 
   .wrapper h1 {
-    font-size: 100px;
+    font-size: 80px;
     margin: 0;
     font-weight: normal;
     animation: neon 3s infinite;
