@@ -1,0 +1,91 @@
+<template>
+    <div>
+        <p>123</p>
+    </div>
+</template>
+
+<script>
+const log = console.log;
+export default {
+    data() {
+        return {
+
+        };
+    },
+    components: {},
+    computed: {
+
+    },
+    created() {
+
+    },
+    mounted() {
+
+    },
+    methods: {
+
+    },
+}
+
+</script>
+
+<style lang='scss' scoped>
+.checkbox {
+  position: relative;
+  height: 30px;
+}
+.checkbox input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+.checkbox label {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+}
+.checkbox label:before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+}
+.checkbox label:after {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+  border: 0;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  background: #fff;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+}
+.checkbox input[type="checkbox"]:checked + label:before {
+  background: #4cd764;
+  border-color: #4cd764;
+}
+.checkbox input[type="checkbox"]:checked + label:after {
+  background: #4cd764;
+}
+</style>

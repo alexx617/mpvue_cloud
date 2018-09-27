@@ -15,12 +15,13 @@
 					<span>0</span>
 					积分
 				</div>
-				<p class="p">登陆后可享受会员权益</p>
+				<p class="p" v-if="hasOpenId">欢迎您, {{userInfo.nickName}}</p>
+				<p class="p" v-else>登陆后可享受会员权益</p>
 			</div>
 			<!-- <button open-type='getPhoneNumber' @getphonenumber='getPhoneNumber'> 获取电话号码</button> -->
 		</div>
 		<div class="middle">
-			<div>
+			<div @click="$go('/pages/menu/main')">
 				<i-icon type="shop_fill" size="38" />
 				<p>功能2</p>
 			</div>
@@ -90,19 +91,21 @@ export default {
 			if (e.mp.detail.userInfo) {
 				setStorage('userInfo', e.mp.detail.userInfo).then(rs => {
 					console.log('userInfo储存成功');
+					this.avatarUrl = e.mp.detail.userInfo.avatarUrl;
+					this.userInfo = e.mp.detail.userInfo;
 					this.showUserInfo = false;
 				})
-				this.avatarUrl = e.mp.detail.userInfo.avatarUrl;
-				this.userInfo = e.mp.detail.userInfo;
 			} else {
-				this.$alert('需要授权才能正常使用所有功能')
+				this.$alert('需要授权才能正常使用所有功能', () => { }, false, '同意授权')
 			}
-		}
+		},
 	},
 
 	mounted() {
 		getStorage('userInfo').then(rs => {
 			this.showUserInfo = false;
+			this.avatarUrl = rs.data.avatarUrl;
+			this.userInfo = rs.data;
 		}).catch(err => {
 			this.showUserInfo = true;
 		})

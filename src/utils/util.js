@@ -24,7 +24,8 @@ export default {
     })
   },
   $go(url) {
-    wx.redirectTo({
+    // wx.redirectTo({
+    wx.navigateTo({
       url
     })
   },
